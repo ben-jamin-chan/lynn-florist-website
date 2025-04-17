@@ -3,7 +3,7 @@ import { Clock, Heart, MapPin, Flower2, Users2, Award } from 'lucide-react';
 
 function About() {
   const stats = [
-    { icon: <Clock size={24} />, value: "25+", label: "Years of Experience" },
+    { icon: <Clock size={24} />, value: "5+", label: "Years of Experience" },
     { icon: <Heart size={24} />, value: "10k+", label: "Happy Customers" },
     { icon: <MapPin size={24} />, value: "3", label: "Store Locations" }
   ];
@@ -12,7 +12,7 @@ function About() {
     {
       name: "Bui Khanh Linh (Lynn)",
       role: "Head Florist & Createive Director",
-      image: "../../public/owner.jpg",
+      image: "/owner.jpg",
       bio: "With over 5+ years of experience in floral design, Lynn leads our creative team with passion and innovation."
     },
     // {

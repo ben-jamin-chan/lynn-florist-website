@@ -167,7 +167,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-800">Our Location</h4>
-                      <p className="text-gray-600">123 Flower Street, Garden City, NY 10001</p>
+                      <p className="text-gray-600">Kuala Lumpur, Malaysia</p>
                     </div>
                   </li>
                   <li className="flex items-start">
@@ -176,7 +176,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-800">Phone</h4>
-                      <p className="text-gray-600">(555) 123-4567</p>
+                      <p className="text-gray-600">+6011-6980-9879</p>
                     </div>
                   </li>
                   <li className="flex items-start">
@@ -185,7 +185,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-800">Email</h4>
-                      <p className="text-gray-600">hello@bloomandpetal.com</p>
+                      <p className="text-gray-600">khanhlinh14498@gmail.com</p>
                     </div>
                   </li>
                   <li className="flex items-start">
