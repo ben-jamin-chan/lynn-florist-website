@@ -19,9 +19,9 @@ const Footer = () => {
               <a href="https://facebook.com" className="text-gray-500 hover:text-emerald-600" aria-label="Facebook">
                 <Facebook size={20} />
               </a>
-              <a href="https://twitter.com" className="text-gray-500 hover:text-emerald-600" aria-label="Twitter">
+              {/* <a href="https://twitter.com" className="text-gray-500 hover:text-emerald-600" aria-label="Twitter">
                 <Twitter size={20} />
-              </a>
+              </a> */}
             </div>
           </div>
 

@@ -34,21 +34,21 @@ const Home = () => {
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
+      name: "Kim",
       date: "June 15, 2023",
       rating: 5,
       text: "The wedding flowers exceeded all my expectations. Everyone was commenting on how beautiful they were!",
       image: "/testimonial-1.jpg",
     },
     {
-      name: "Michael Chen",
+      name: "Nhat Linh",
       date: "April 3, 2023",
       rating: 5,
       text: "I've been using their subscription service for 6 months now, and the quality and variety are consistently excellent.",
       image: "/testimonial-2.jpg",
     },
     {
-      name: "Emma Williams",
+      name: "Raymond",
       date: "May 22, 2023",
       rating: 4,
       text: "The bouquet I ordered for my mother's birthday was gorgeous and lasted for over two weeks!",

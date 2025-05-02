@@ -205,7 +205,8 @@ const Contact = () => {
               <div className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 h-80">
                 {/* This would be replaced with an actual map component in a real implementation */}
                 <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                  <p className="text-gray-500">Map would be displayed here</p>
+                  {/* <p className="text-gray-500">Map would be displayed here</p> */}
+                  
                 </div>
               </div>
             </div>

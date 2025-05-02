@@ -59,7 +59,7 @@ function About() {
             </p>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 w-full h-16 bg-[url('https://images.unsplash.com/photo-1558350315-8aa00e8e4590?auto=format&fit=crop&q=80')] bg-cover opacity-10"></div>
+        <div className="absolute bottom-0 left-0 w-full h-16 bg-[url('https://images.unsplash.com/photo-1558350315-8aa00e8e4590?auto=format&fit=crop&q=80')] bg-cover opacity-20"></div>
       </section>
 
       {/* Stats Section */}
