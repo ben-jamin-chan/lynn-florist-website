@@ -14,7 +14,7 @@ const Hero = () => {
         }}
       >
         {/* Semi-transparent overlay */}
-        <div className="absolute inset-0 bg-white/60"></div>
+        <div className="absolute inset-0 bg-white/50"></div>
       </div>
 
       {/* Decorative elements */}

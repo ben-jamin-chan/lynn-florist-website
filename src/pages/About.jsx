@@ -11,7 +11,7 @@ function About() {
   const team = [
     {
       name: "Bui Khanh Linh (Lynn)",
-      role: "Head Florist & Createive Director",
+      role: "Head Florist & Creative Director",
       image: "/owner.jpg",
       bio: "With over 5+ years of experience in floral design, Lynn leads our creative team with passion and innovation."
     },
