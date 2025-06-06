@@ -15,19 +15,20 @@ const Gallery = () => {
     },
     {
       id: 2,
-      image: "/gallery-event.jpg",
+      image: "https://www.odealarose.com/media/cache/585_780_jpeg/cms/phpjYDmKo-6477b5289eebb.jpeg",
       title: "Corporate Event Centerpiece",
       category: "event",
     },
     {
       id: 3,
-      image: "/gallery-bouquet.jpg",
+      
+      image: "https://www.poetryinflowers.com.au/cdn/shop/products/mdaybunchesteainfuser3_680x1024.jpg?v=1742954154",
       title: "Birthday Arrangement",
       category: "bouquet",
     },
     {
       id: 4,
-      image: "/gallery-wedding2.jpg",
+      image: "https://www.originalweddings.com/wp-content/smush-webp/2022/09/IMG_2824-1-1.jpg.webp",
       title: "Bridal Party Flowers",
       category: "wedding",
     },
@@ -45,7 +46,7 @@ const Gallery = () => {
     },
     {
       id: 7,
-      image: "/gallery-seasonal.jpg",
+      image: "https://www.cascadefloralwholesale.com/wp-content/uploads/2021/11/Holiday-bouquet-with-pine-cones-red-roses-white-cotton-flowers-berries-and-green-pine-accents.jpg",
       title: "Holiday Centerpiece",
       category: "seasonal",
     },
