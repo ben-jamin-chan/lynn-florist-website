@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react"
 import { initEmailJS, sendContactEmail } from "../lib/emailjs"
+import GoogleMap from "../components/GoogleMap"
+import { GOOGLE_MAPS_CONFIG, FLORIST_MARKER } from "../config/maps"
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -281,12 +283,14 @@ const Contact = () => {
                 </ul>
               </div>
 
-              <div className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 h-80">
-                {/* This would be replaced with an actual map component in a real implementation */}
-                <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                  {/* <p className="text-gray-500">Map would be displayed here</p> */}
-                  
-                </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100">
+                <GoogleMap
+                  apiKey={GOOGLE_MAPS_CONFIG.apiKey}
+                  center={GOOGLE_MAPS_CONFIG.location}
+                  zoom={GOOGLE_MAPS_CONFIG.zoom}
+                  markers={[FLORIST_MARKER]}
+                  className="w-full h-80"
+                />
               </div>
             </div>
           </div>
