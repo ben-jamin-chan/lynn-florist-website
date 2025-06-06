@@ -14,7 +14,7 @@ const Hero = () => {
         }}
       >
         {/* Semi-transparent overlay */}
-        <div className="absolute inset-0 bg-white/50"></div>
+        <div className="absolute inset-0 bg-white/50 opacity-70"></div>
       </div>
 
       {/* Decorative elements */}
@@ -26,18 +26,18 @@ const Hero = () => {
       </div> */}
 
       <div className="container-custom relative z-10 text-center">
-        <h1 className="drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] text-5xl md:text-7xl font-medium mb-6 text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-pink-500 animate-gradient-shift bg-[length:300%_300%]">
+        <h1 className="drop-shadow-[3px_1.2px_1.2px_rgba(0,0,0,0.8)] text-5xl md:text-7xl font-medium mb-6 text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-pink-500 animate-gradient-shift bg-[length:300%_300%]">
           Beautiful Flowers for Every Occasion
         </h1>
 
-        <p className="text-2xl md:text-3xl text-center text-gray-100 font-light leading-relaxed tracking-wider mb-12 max-w-3xl mx-auto drop-shadow-[_1px_2px_rgba(0,0,0,0.3)]">
-          <span className="text-rose-300 font-medium">Handcrafted</span> floral
+        <p className="text-2xl font-normal md:text-3xl text-center text-gray-100 leading-relaxed tracking-wider mb-12 max-w-3xl mx-auto drop-shadow-[_1.2px_1.8px_rgba(0,0,0,0.8)]">
+          <span className="text-rose-300 font-semibold">Handcrafted</span> floral
           arrangements,
           <br className="hidden md:block" />
-          delivered with <span className="text-rose-400 font-medium">
+          delivered with <span className="text-rose-400 font-semibold">
             care
           </span>{" "}
-          and <span className="text-rose-400 font-medium">passion</span>.
+          and <span className="text-rose-200 font-semibold">passion</span>.
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-4">

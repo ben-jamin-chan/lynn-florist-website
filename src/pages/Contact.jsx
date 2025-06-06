@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react"
+import { initEmailJS, sendContactEmail } from "../lib/emailjs"
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,40 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+  const [errors, setErrors] = useState({})
+
+  // Initialize EmailJS when component mounts
+  useEffect(() => {
+    initEmailJS()
+  }, [])
+
+  // Form validation
+  const validateForm = () => {
+    const newErrors = {}
+    
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required"
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required"
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Email is invalid"
+    }
+    
+    if (!formData.subject.trim()) {
+      newErrors.subject = "Subject is required"
+    }
+    
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required"
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Message must be at least 10 characters long"
+    }
+    
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -20,24 +55,45 @@ const Contact = () => {
       ...prev,
       [name]: value,
     }))
+    
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: ""
+      }))
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    // Validate form before submission
+    if (!validateForm()) {
+      return
+    }
+    
     setIsSubmitting(true)
+    setSubmitStatus(null)
 
-    // Simulate API call
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      setSubmitStatus("success")
-      // Reset form after successful submission
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-      })
+      const result = await sendContactEmail(formData)
+      
+      if (result.success) {
+        setSubmitStatus("success")
+        // Reset form after successful submission
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        })
+        setErrors({})
+      } else {
+        setSubmitStatus("error")
+      }
     } catch (error) {
+      console.error('Contact form submission error:', error)
       setSubmitStatus("error")
     } finally {
       setIsSubmitting(false)
@@ -76,8 +132,11 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                    className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+                      errors.name ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   />
+                  {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
                 </div>
 
                 <div>
@@ -91,8 +150,11 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                    className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+                      errors.email ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   />
+                  {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
                 </div>
 
                 <div>
@@ -106,8 +168,11 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                    className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+                      errors.subject ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   />
+                  {errors.subject && <p className="mt-1 text-sm text-red-600">{errors.subject}</p>}
                 </div>
 
                 <div>
@@ -121,8 +186,12 @@ const Contact = () => {
                     onChange={handleChange}
                     rows="5"
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                    placeholder="Please describe your inquiry or message (minimum 10 characters)"
+                    className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+                      errors.message ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   ></textarea>
+                  {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
                 </div>
 
                 <div>
@@ -150,7 +219,17 @@ const Contact = () => {
 
                 {submitStatus === "error" && (
                   <div className="p-4 bg-red-50 text-red-700 rounded-md">
-                    There was an error sending your message. Please try again or contact us directly.
+                    <p className="font-medium">Unable to send your message</p>
+                    <p className="text-sm mt-1">
+                      Please check your internet connection and try again, or contact us directly at{" "}
+                      <a href="tel:+601169809879" className="underline">
+                        +6011-6980-9879
+                      </a>{" "}
+                      or{" "}
+                      <a href="mailto:khanhlinh14498@gmail.com" className="underline">
+                        khanhlinh14498@gmail.com
+                      </a>
+                    </p>
                   </div>
                 )}
               </form>

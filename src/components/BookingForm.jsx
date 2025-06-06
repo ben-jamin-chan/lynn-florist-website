@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { initEmailJS, sendBookingEmail } from "../lib/emailjs"
 
 const BookingForm = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +16,53 @@ const BookingForm = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+  const [errors, setErrors] = useState({})
+
+  // Initialize EmailJS when component mounts
+  useEffect(() => {
+    initEmailJS()
+  }, [])
+
+  // Form validation
+  const validateForm = () => {
+    const newErrors = {}
+    
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required"
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required"
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Email is invalid"
+    }
+    
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required"
+    }
+    
+    if (!formData.date) {
+      newErrors.date = "Preferred date is required"
+    } else {
+      const selectedDate = new Date(formData.date)
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+      if (selectedDate < today) {
+        newErrors.date = "Date cannot be in the past"
+      }
+    }
+    
+    if (!formData.time) {
+      newErrors.time = "Preferred time is required"
+    }
+    
+    if (!formData.service) {
+      newErrors.service = "Service type is required"
+    }
+    
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -22,27 +70,48 @@ const BookingForm = () => {
       ...prev,
       [name]: value,
     }))
+    
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: ""
+      }))
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    // Validate form before submission
+    if (!validateForm()) {
+      return
+    }
+    
     setIsSubmitting(true)
+    setSubmitStatus(null)
 
-    // Simulate API call
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      setSubmitStatus("success")
-      // Reset form after successful submission
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        date: "",
-        time: "",
-        service: "",
-        message: "",
-      })
+      const result = await sendBookingEmail(formData)
+      
+      if (result.success) {
+        setSubmitStatus("success")
+        // Reset form after successful submission
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          date: "",
+          time: "",
+          service: "",
+          message: "",
+        })
+        setErrors({})
+      } else {
+        setSubmitStatus("error")
+      }
     } catch (error) {
+      console.error('Booking submission error:', error)
       setSubmitStatus("error")
     } finally {
       setIsSubmitting(false)
@@ -65,8 +134,11 @@ const BookingForm = () => {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+              errors.name ? 'border-red-500' : 'border-gray-300'
+            }`}
           />
+          {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
         </div>
 
         <div>
@@ -80,8 +152,11 @@ const BookingForm = () => {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+              errors.email ? 'border-red-500' : 'border-gray-300'
+            }`}
           />
+          {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
         </div>
 
         <div>
@@ -95,8 +170,11 @@ const BookingForm = () => {
             value={formData.phone}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+              errors.phone ? 'border-red-500' : 'border-gray-300'
+            }`}
           />
+          {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
         </div>
 
         <div>
@@ -109,7 +187,9 @@ const BookingForm = () => {
             value={formData.service}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+              errors.service ? 'border-red-500' : 'border-gray-300'
+            }`}
           >
             <option value="">Select a service</option>
             <option value="wedding">Wedding Flowers</option>
@@ -118,6 +198,7 @@ const BookingForm = () => {
             <option value="subscription">Flower Subscription</option>
             <option value="workshop">Floral Workshop</option>
           </select>
+          {errors.service && <p className="mt-1 text-sm text-red-600">{errors.service}</p>}
         </div>
 
         <div>
@@ -131,8 +212,12 @@ const BookingForm = () => {
             value={formData.date}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+            min={new Date().toISOString().split('T')[0]}
+            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+              errors.date ? 'border-red-500' : 'border-gray-300'
+            }`}
           />
+          {errors.date && <p className="mt-1 text-sm text-red-600">{errors.date}</p>}
         </div>
 
         <div>
@@ -146,8 +231,11 @@ const BookingForm = () => {
             value={formData.time}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent ${
+              errors.time ? 'border-red-500' : 'border-gray-300'
+            }`}
           />
+          {errors.time && <p className="mt-1 text-sm text-red-600">{errors.time}</p>}
         </div>
       </div>
 
@@ -180,7 +268,17 @@ const BookingForm = () => {
 
       {submitStatus === "error" && (
         <div className="p-4 bg-red-50 text-red-700 rounded-md">
-          There was an error submitting your request. Please try again or contact us directly.
+          <p className="font-medium">Unable to submit your booking request</p>
+          <p className="text-sm mt-1">
+            Please check your internet connection and try again, or contact us directly at{" "}
+            <a href="tel:+1234567890" className="underline">
+              (123) 456-7890
+            </a>{" "}
+            or{" "}
+            <a href="mailto:info@floristwebsite.com" className="underline">
+              info@floristwebsite.com
+            </a>
+          </p>
         </div>
       )}
     </form>
