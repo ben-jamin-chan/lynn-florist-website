@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
+import WhatsAppButton from "./components/WhatsAppButton"
 import Home from "./pages/Home"
 import Services from "./pages/Services"
 import Gallery from "./pages/Gallery"
@@ -25,6 +26,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <WhatsAppButton />
       </div>
     </Router>
   );
