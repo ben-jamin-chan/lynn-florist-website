@@ -55,7 +55,7 @@ function About() {
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-light mb-6 text-gray-800">Our Story</h1>
             <p className="text-xl text-gray-600 mb-8">
-              Crafting beautiful moments with nature's finest blooms since 1998
+              Crafting beautiful moments with nature's finest blooms since 2023
             </p>
           </div>
         </div>
