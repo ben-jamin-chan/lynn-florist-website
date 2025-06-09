@@ -3,6 +3,10 @@ import Hero from "../components/Hero"
 import ServiceCard from "../components/ServiceCard"
 import TestimonialCard from "../components/TestimonialCard"
 import { Link } from "react-router-dom"
+import floristWorking from "/florist-working.jpg"
+import testimonial1 from "/testimonial-1.jpg"
+import testimonial2 from "/testimonial-2.jpg"
+import testimonial3 from "/testimonial-3.jpg"
 
 const Home = () => {
   const services = [
@@ -38,21 +42,21 @@ const Home = () => {
       date: "June 15, 2024",
       rating: 5,
       text: "The wedding flowers exceeded all my expectations. Everyone was commenting on how beautiful they were!",
-      image: "/testimonial-1.jpg",
+      image: testimonial1,
     },
     {
       name: "Nhat Linh",
       date: "April 3, 2024",
       rating: 5,
       text: "I've been using their subscription service for 6 months now, and the quality and variety are consistently excellent.",
-      image: "/testimonial-2.jpg",
+      image: testimonial2,
     },
     {
       name: "Raymond",
       date: "May 22, 2024",
       rating: 4,
       text: "The bouquet I ordered for my mother's birthday was gorgeous and lasted for over two weeks!",
-      image: "/testimonial-3.jpg",
+      image: testimonial3,
     },
   ]
 
@@ -118,7 +122,7 @@ const Home = () => {
             </div>
             <div className="relative">
               <img
-                src="/florist-working.jpg"
+                src={floristWorking}
                 alt="Florist arranging flowers"
                 className="rounded-lg shadow-lg w-full h-auto"
               />

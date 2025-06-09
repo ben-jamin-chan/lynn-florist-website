@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import heroFlowers from "/hero-flowers.jpg";
+import flowerDecoration1 from "/flower-decoration-1.svg";
+import flowerDecoration2 from "/flower-decoration-2.svg";
 
 const Hero = () => {
   return (
@@ -7,7 +10,7 @@ const Hero = () => {
       <div
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: "url('/hero-flowers.jpg')",
+          backgroundImage: `url('${heroFlowers}')`,
           backgroundSize: "cover",
           backgroundPosition: "center 30%",
           backgroundRepeat: "no-repeat",
@@ -19,10 +22,10 @@ const Hero = () => {
 
       {/* Decorative elements */}
       {/* <div className="absolute top-0 right-0 w-64 h-64 opacity-20 z-0">
-        <img src="/flower-decoration-1.svg" alt="" className="w-full h-full object-contain" />
+        <img src={flowerDecoration1} alt="" className="w-full h-full object-contain" />
       </div>
       <div className="absolute bottom-0 left-0 w-64 h-64 opacity-20 z-0">
-        <img src="/flower-decoration-2.svg" alt="" className="w-full h-full object-contain" />
+        <img src={flowerDecoration2} alt="" className="w-full h-full object-contain" />
       </div> */}
 
       <div className="container-custom relative z-10 text-center">

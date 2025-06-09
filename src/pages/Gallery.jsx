@@ -2,6 +2,11 @@
 
 import { useState } from "react"
 import GalleryItem from "../components/GalleryItem"
+import galleryWedding from "/gallery-wedding.jpg"
+import gallerySubscription from "/gallery-subscription.jpg"
+import gallerySympathy from "/gallery-sympathy.jpg"
+import galleryBouquet2 from "/gallery-bouquet2.jpg"
+import gallerySubscription2 from "/gallery-subscription2.jpg"
 
 const Gallery = () => {
   const [filter, setFilter] = useState("all")
@@ -9,7 +14,7 @@ const Gallery = () => {
   const galleryItems = [
     {
       id: 1,
-      image: "/gallery-wedding.jpg",
+      image: galleryWedding,
       title: "Spring Wedding Bouquet",
       category: "wedding",
     },
@@ -34,13 +39,13 @@ const Gallery = () => {
     },
     {
       id: 5,
-      image: "/gallery-subscription.jpg",
+      image: gallerySubscription,
       title: "Summer Subscription Box",
       category: "subscription",
     },
     {
       id: 6,
-      image: "/gallery-sympathy.jpg",
+      image: gallerySympathy,
       title: "Sympathy Arrangement",
       category: "sympathy",
     },
@@ -52,13 +57,13 @@ const Gallery = () => {
     },
     {
       id: 8,
-      image: "/gallery-bouquet2.jpg",
+      image: galleryBouquet2,
       title: "Anniversary Bouquet",
       category: "bouquet",
     },
     {
       id: 9,
-      image: "/gallery-subscription2.jpg",
+      image: gallerySubscription2,
       title: "Office Weekly Flowers",
       category: "subscription",
     },

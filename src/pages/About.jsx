@@ -1,5 +1,6 @@
 import React from 'react';
 import { Clock, Heart, MapPin, Flower2, Users2, Award } from 'lucide-react';
+import ownerImage from "/owner.jpg";
 
 function About() {
   const stats = [
@@ -12,7 +13,7 @@ function About() {
     {
       name: "Bui Khanh Linh (Lynn)",
       role: "Head Florist & Creative Director",
-      image: "/owner.jpg",
+      image: ownerImage,
       bio: "With over 5+ years of experience in floral design, Lynn leads our creative team with passion and innovation."
     },
     // {

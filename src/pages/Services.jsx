@@ -1,6 +1,8 @@
 import { Flower, Gift, Calendar, Users, Heart, Sparkles, Leaf, BookOpen } from "lucide-react"
 import ServiceCard from "../components/ServiceCard"
 import { Link } from "react-router-dom"
+import flowerDecoration1 from "/flower-decoration-1.svg"
+import gallerySubscription from "/gallery-subscription.jpg"
 
 const Services = () => {
   const services = [
@@ -67,7 +69,7 @@ const Services = () => {
       {/* Hero Section */}
       <section className="py-20 bg-emerald-50 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 opacity-20">
-          <img src="/flower-decoration-1.svg" alt="" className="w-full h-full object-contain" />
+          <img src={flowerDecoration1} alt="" className="w-full h-full object-contain" />
         </div>
         <div className="container-custom text-center relative z-10">
           <h1 className="text-4xl md:text-5xl font-light mb-6 text-gray-800">Our Services</h1>
@@ -75,7 +77,7 @@ const Services = () => {
             Discover our range of floral services designed to meet all your needs
           </p>
           <img
-            src="/gallery-subscription.jpg"
+            src={gallerySubscription}
             alt="Floral arrangement services"
             className="max-w-sm mx-auto rounded-lg shadow-lg mt-8"
           />
